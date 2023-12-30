@@ -6,6 +6,17 @@ public class Interval {
     private int day;
     private int hour;
 
+    public Interval(int day, int hour) {
+        this.day = day;
+        this.hour = hour;
+    }
+    public Interval() {
+        //
+    }
+
+    public void printInformation() {
+        System.out.println("Interval day " + day + " hour " + hour);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

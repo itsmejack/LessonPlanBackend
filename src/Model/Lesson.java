@@ -18,12 +18,18 @@ public class Lesson extends Interval {
         return student;
     }
 
+    @Override
+    public void printInformation() {
+        System.out.println("Lesson day " + getDay() + " hour " + getHour());
+    }
 
     public void setLesson(Interval interval) {
         setDay(interval.getDay());
         setHour(interval.getHour());
         teacher.getFreeIntervals().remove(interval);
+        teacher.addLesson(this);
         student.getFreeIntervals().remove(interval);
+        student.addLesson(this);
     }
     public boolean isLessonSet() {
         return getDay() != 0 && getHour() != 0;
