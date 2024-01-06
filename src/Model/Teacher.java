@@ -9,7 +9,7 @@ public class Teacher extends Person {
         System.out.println("Teacher:");
         super.printInformation();
     }
-    public Teacher(Set<Interval> freeIntervals) {
-        super(freeIntervals);
+    public Teacher(Set<Interval> freeIntervals, String name) {
+        super(freeIntervals, name);
     }
 }

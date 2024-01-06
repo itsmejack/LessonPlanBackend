@@ -1,38 +1,84 @@
-import Model.Interval;
-import Model.Lesson;
-import Model.Student;
-import Model.Teacher;
+import Model.*;
 import UseCases.PlanLessonsUC;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        Interval freeIntervalTeacher = new Interval(1,1);
-        Interval freeIntervalStudent = new Interval(2, 1);
-        Interval freeIntervalCommon = new Interval(2, 2);
+        Student student1 = new Student(getFullWeek(), "Student 1");
+        Student student2 = new Student(getFullWeek(), "Student 2");
+        Student student3 = new Student(getFullWeek(), "Student 3");
 
-        Teacher teacher = new Teacher(new HashSet<>(Arrays.asList(freeIntervalTeacher, freeIntervalCommon)));
-        Student student = new Student(new HashSet<>(Arrays.asList(freeIntervalStudent, freeIntervalCommon)));
+        Teacher teacher1 = new Teacher(getFullWeek(), "Teacher 1");
+        Teacher teacher2 = new Teacher(getFullWeek(), "Teacher 2");
+        Teacher teacher3 = new Teacher(getFullWeek(), "Teacher 3");
 
-        Lesson lesson = new Lesson(teacher,student);
+        List<Lesson> lessons = new ArrayList<>();
 
-        System.out.println("Before:");
-        System.out.println("==========");
-        teacher.printInformation();
-        student.printInformation();
+        lessons.addAll(getManyLessons(new Lesson(teacher1, student1, "MAT"), 9));
+        lessons.addAll(getManyLessons(new Lesson(teacher1, student2, "MAT"), 9));
+        lessons.addAll(getManyLessons(new Lesson(teacher1, student3, "MAT"), 9));
+
+        lessons.addAll(getManyLessons(new Lesson(teacher2, student1, "ENG"), 9));
+        lessons.addAll(getManyLessons(new Lesson(teacher2, student2, "ENG"), 9));
+        lessons.addAll(getManyLessons(new Lesson(teacher2, student3, "ENG"), 9));
+
+        lessons.addAll(getManyLessons(new Lesson(teacher3, student1, "CHE"), 9));
+        lessons.addAll(getManyLessons(new Lesson(teacher3, student2, "CHE"), 9));
+        lessons.addAll(getManyLessons(new Lesson(teacher3, student3, "CHE"), 9));
+
+
+        teacher1.printTimetable();
+        teacher2.printTimetable();
+        teacher3.printTimetable();
+        student1.printTimetable();
+        student2.printTimetable();
+        student3.printTimetable();
 
         System.out.println();
-        PlanLessonsUC.buildPlan(Arrays.asList(lesson));
+        PlanLessonsUC.buildPlan(lessons);
 
-        System.out.println("After:");
-        System.out.println("==========");
-        teacher.printInformation();
-        student.printInformation();
+        teacher1.printTimetable();
+        teacher2.printTimetable();
+        teacher3.printTimetable();
+        student1.printTimetable();
+        student2.printTimetable();
+        student3.printTimetable();
 
+    }
 
+    private static List<Lesson> getManyLessons(Lesson lesson, int number) {
+        List<Lesson> result = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            result.add(new Lesson(lesson));
+        }
+        return result;
+    }
+
+    private static Set<Interval> getFullWeek() {
+        Set<Interval> result = new HashSet<>();
+        for(Day day : Day.getAllDays()) {
+            for(NumberOfLesson hour : NumberOfLesson.getLessonNumbers()) {
+                result.add(new Interval(day, hour));
+            }
+        }
+        return result;
+    }
+
+    private static Set<Interval> getOnlyHour(NumberOfLesson hour) {
+        Set<Interval> result = new HashSet<>();
+        for(Day day : Day.getAllDays()) {
+            result.add(new Interval(day, hour));
+        }
+        return result;
+    }
+
+    private static Set<Interval> getOnlyDay(Day day) {
+        Set<Interval> result = new HashSet<>();
+        for(NumberOfLesson hour : NumberOfLesson.getLessonNumbers()) {
+            result.add(new Interval(day, hour));
+        }
+        return result;
     }
 }

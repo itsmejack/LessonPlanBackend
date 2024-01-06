@@ -8,7 +8,7 @@ public class Student extends Person {
         System.out.println("Student:");
         super.printInformation();
     }
-    public Student(Set<Interval> freeIntervals) {
-        super(freeIntervals);
+    public Student(Set<Interval> freeIntervals, String name) {
+        super(freeIntervals, name);
     }
 }

@@ -3,12 +3,15 @@ package Model;
 import java.util.Objects;
 
 public class Interval {
-    private int day;
-    private int hour;
+    private Day day = Day.NONE;
+    private NumberOfLesson hour = NumberOfLesson.NONE;
 
-    public Interval(int day, int hour) {
+    protected String name = "XXX";
+
+    public Interval(Day day, NumberOfLesson hour) {
         this.day = day;
         this.hour = hour;
+        this.name = "---";
     }
     public Interval() {
         //
@@ -30,20 +33,24 @@ public class Interval {
         return Objects.hash(day, hour, occupied);
     }
 
-    public void setDay(int day) {
+    public void setDay(Day day) {
         this.day = day;
     }
 
-    public int getDay() {
+    public Day getDay() {
         return day;
     }
 
-    public void setHour(int hour) {
+    public void setHour(NumberOfLesson hour) {
         this.hour = hour;
     }
 
-    public int getHour() {
+    public NumberOfLesson getHour() {
         return hour;
+    }
+
+    public String getName() {
+        return name;
     }
     protected boolean occupied = false;
 

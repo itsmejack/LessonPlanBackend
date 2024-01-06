@@ -4,11 +4,16 @@ public class Lesson extends Interval {
     private Teacher teacher;
     private Student student;
 
-    public Lesson(Teacher teacher, Student student) {
+    public Lesson(Teacher teacher, Student student, String name) {
         //?? do we need this info here?
         this.teacher = teacher;
         this.student = student;
+        this.name = name;
         this.occupied = true;
+    }
+
+    public Lesson(Lesson lesson) {
+        this(lesson.getTeacher(), lesson.getStudent(), lesson.getName());
     }
     public Teacher getTeacher() {
         return teacher;
@@ -32,6 +37,6 @@ public class Lesson extends Interval {
         student.addLesson(this);
     }
     public boolean isLessonSet() {
-        return getDay() != 0 && getHour() != 0;
+        return getDay() != Day.NONE && getHour() != NumberOfLesson.NONE;
     }
 }
