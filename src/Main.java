@@ -46,6 +46,9 @@ public class Main {
         student2.printTimetable();
         student3.printTimetable();
 
+        PlanLessonsUC.getFailedMatchesCounter();
+        PlanLessonsUC.getRescheduledPerformedCounter();
+        PlanLessonsUC.getRescheduledTrialsCounter();
     }
 
     private static List<Lesson> getManyLessons(Lesson lesson, int number) {

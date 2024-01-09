@@ -19,6 +19,10 @@ public class Person {
         lessons.forEach(Lesson::printInformation);
     }
 
+    public Set<Lesson> getLessons() {
+        return lessons;
+    }
+
     public void printTimetable() {
         System.out.println(name);
         Interval[][] intervals = initWeek();
